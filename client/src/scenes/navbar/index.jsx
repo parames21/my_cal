@@ -56,7 +56,7 @@ const Navbar = () => {
             },
           }}
         >
-          Sociopedia
+          MERN Social Media
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
