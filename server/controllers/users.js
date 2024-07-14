@@ -1,5 +1,6 @@
 import User from "../models/User.js";
-import { users } from "../data/index.js";
+import { users, posts } from "../data/index.js";
+import Post from "../models/Post.js";
 /* READ */
 export const getUser = async (req, res) => {
   try {
@@ -71,6 +72,21 @@ export const popUser = async (req, res) => {
     });
 
     res.status(200).json({ message: "Users added" });
+  }
+  catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}
+
+
+export const popPosts = async (req, res) => {
+  try {
+    posts.forEach(async (post) => {
+      const newPost = new Post(post);
+      await newPost.save();
+    });
+
+    res.status(200).json({ message: "Posts added" });
   }
   catch (err) {
     res.status(404).json({ message: err.message });
