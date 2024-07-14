@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-
+import { users } from "../data/index.js";
 /* READ */
 export const getUser = async (req, res) => {
   try {
@@ -63,3 +63,16 @@ export const addRemoveFriend = async (req, res) => {
 };
 
 
+export const popUser = async (req, res) => {
+  try {
+    users.forEach(async (user) => {
+      const newUser = new User(user);
+      await newUser.save();
+    });
+
+    res.status(200).json({ message: "Users added" });
+  }
+  catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}
